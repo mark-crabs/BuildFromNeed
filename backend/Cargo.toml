@@ -1,3 +1,17 @@
 [workspace]
 resolver = "3"
-members = ["backend"]
+members = ["backend", "users", "utils"]
+
+[workspace.dependencies]
+utils = {path = "./utils" }
+actix-web = "4"
+diesel = "2.3.5"
+tokio = { version = "1", features = ["full"] }
+sqlx = { version = "0.8", features = ["postgres", "runtime-tokio-native-tls", "uuid", "chrono", "migrate"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0.100"
+tracing-actix-web = "0.7"
+tracing = "0.1"
+log = "0.4"
+env_logger = "0.11"
