@@ -5,7 +5,11 @@ edition = "2024"
 
 [dependencies]
 actix-web = { workspace = true }
-
 utils = {workspace = true }
+users = {workspace = true }
 anyhow = { workspace = true }
 env_logger = { workspace = true }
+diesel = { workspace = true }
+problems = { workspace = true }
+solutions = { workspace = true }
+interactions = { workspace = true }
