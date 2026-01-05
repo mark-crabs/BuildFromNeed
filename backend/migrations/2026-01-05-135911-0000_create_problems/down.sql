@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS problem;
+DROP TABLE IF EXISTS featured;
