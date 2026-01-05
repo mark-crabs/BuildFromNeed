@@ -1,0 +1,14 @@
+[package]
+name = "interactions"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { workspace = true }
+users = { workspace = true }
+utils = { workspace = true }
+problems = { workspace = true }
+solutions = { workspace = true }
+chrono = { workspace = true }
+diesel = { workspace = true }
+actix-web = { workspace = true }

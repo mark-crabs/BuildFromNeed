@@ -1,0 +1,41 @@
+CREATE TABLE featured (
+    id SERIAL PRIMARY KEY,
+    expired BOOLEAN NOT NULL DEFAULT FALSE,
+    expiring_date TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE problem (
+    id SERIAL PRIMARY KEY,
+    anonymous BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    flag TEXT NOT NULL CHECK (flag IN (
+        'Duplicate', 
+        'Monitized', 
+        'Solved', 
+        'Irrelevant', 
+        'Inappropriate', 
+        'NSFW', 
+        'NotReviewed'
+    )) DEFAULT 'NotReviewed',
+    featured_id INT NULL REFERENCES featured(id) ON DELETE SET NULL,
+    category TEXT NOT NULL CHECK (category IN (
+        'Technology', 
+        'Medical', 
+        'Sport', 
+        'NotListed'
+    )) DEFAULT 'NotListed',
+    sub_category TEXT,
+    status TEXT NOT NULL CHECK (status IN (
+        'Trending', 
+        'HighDemand', 
+        'Normal'
+    )) DEFAULT 'Normal',
+    public BOOLEAN NOT NULL DEFAULT TRUE,
+    archive BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
