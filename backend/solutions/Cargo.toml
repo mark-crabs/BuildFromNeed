@@ -1,0 +1,13 @@
+[package]
+name = "solutions"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+users = { workspace = true }
+problems = { workspace = true }
+serde = { workspace = true }
+chrono = { workspace = true }
+diesel = { workspace = true }
+utils = { workspace = true }
+actix-web = { workspace = true }
