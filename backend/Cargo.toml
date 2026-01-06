@@ -8,7 +8,12 @@ users = { path = "./users" }
 problems = { path = "./problems" }
 solutions = { path = "./solutions" }
 interactions = { path = "./interactions" }
-actix-web = "4"
+future-utils = "0.12.1"
+actix-cors = "0.7.0"
+oauth2 = "5.0"
+actix-web = { version = "4", features = ["openssl"] }
+openssl = "0.10"
+jsonwebtoken = { version = "10.2.0", features = ["rust_crypto"] }
 diesel = { version = "2.3.5",  features = ["postgres", "r2d2", "chrono"] }
 tokio = { version = "1", features = ["full"] }
 sqlx = { version = "0.8", features = ["postgres", "runtime-tokio-native-tls", "uuid", "chrono", "migrate"] }
@@ -22,5 +27,11 @@ env_logger = "0.11"
 chrono = { version = "0.4.42", features = ["serde"] }
 r2d2 = "0.8.8"
 futures = "0.3.1"
-argon2 = "0.5.3"
-utoipa = "5.4.0"
+actix-web-httpauth = "0.8.2"
+utoipa = { version = "5.4.0", features = ["actix_extras", "chrono"] }
+utoipa-rapidoc = { version = "6.0.0", features = ["actix-web"] }
+utoipa-redoc = { version = "6.0.0", features = ["actix-web"] }
+utoipa-swagger-ui = { version = "9.0.2", features = ["actix-web"] }
+uuid = { version = "1.4.1", features = ["serde", "v4"] }
+validator = { version = "0.20.0", features = ["derive"] }
+reqwest = { version = "0.13.1", features = ["json", "blocking"] } 

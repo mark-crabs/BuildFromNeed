@@ -13,3 +13,6 @@ diesel = { workspace = true }
 problems = { workspace = true }
 solutions = { workspace = true }
 interactions = { workspace = true }
+openssl = { workspace = true }
+future-utils = { workspace = true }
+reqwest = { workspace = true }
