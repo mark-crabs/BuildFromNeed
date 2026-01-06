@@ -1,4 +1,6 @@
 pub mod types;
+use crate::files::types::Oauth2;
+
 use self::types::{ENV, Server};
 use anyhow::Result;
 use dotenv::dotenv;
@@ -10,5 +12,6 @@ pub fn load_env() -> Result<ENV> {
     Ok(ENV::new(
         env::var("DATABASE_URL")?,
         Server::new(env::var("SERVER_PORT")?.parse()?),
+        Oauth2::new(env::var("OAUTH_CLIENT_ID")? ,env::var("OAUTH_CLIENT_SECRET")?,env::var("OAUTH_DOMAIN")?, env::var("OAUTH_REGION")?, env::var("OAUTH_POOL_ID")?)
     ))
 }
