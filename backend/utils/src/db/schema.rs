@@ -2,7 +2,7 @@
 
 diesel::table! {
     featured (id) {
-        id -> Int4,
+        id -> Int8,
         expired -> Bool,
         expiring_date -> Timestamp,
         created_at -> Timestamp,
@@ -12,13 +12,13 @@ diesel::table! {
 
 diesel::table! {
     problem (id) {
-        id -> Int4,
+        id -> Int8,
         anonymous -> Bool,
-        user_id -> Int4,
+        user_id -> Int8,
         title -> Text,
         description -> Text,
         flag -> Text,
-        featured_id -> Nullable<Int4>,
+        featured_id -> Nullable<Int8>,
         category -> Text,
         sub_category -> Nullable<Text>,
         status -> Text,
@@ -31,9 +31,9 @@ diesel::table! {
 
 diesel::table! {
     problem_favourite (id) {
-        id -> Int4,
-        user_id -> Int4,
-        problem_id -> Int4,
+        id -> Int8,
+        user_id -> Int8,
+        problem_id -> Int8,
         created_at -> Timestamp,
         updated_at -> Timestamp,
     }
@@ -41,29 +41,29 @@ diesel::table! {
 
 diesel::table! {
     problem_like (id) {
-        id -> Int4,
+        id -> Int8,
         option -> Text,
-        problem_id -> Int4,
-        user_id -> Int4,
+        problem_id -> Int8,
+        user_id -> Int8,
         created_at -> Timestamp,
     }
 }
 
 diesel::table! {
     problem_view (id) {
-        id -> Int4,
-        user_id -> Int4,
-        problem_id -> Int4,
+        id -> Int8,
+        user_id -> Int8,
+        problem_id -> Int8,
         created_at -> Timestamp,
     }
 }
 
 diesel::table! {
     solution (id) {
-        id -> Int4,
+        id -> Int8,
         content -> Text,
-        user_id -> Int4,
-        problem_id -> Int4,
+        user_id -> Int8,
+        problem_id -> Int8,
         solution_type -> Text,
         created_at -> Timestamp,
         updated_at -> Timestamp,
@@ -72,9 +72,9 @@ diesel::table! {
 
 diesel::table! {
     solution_favourite (id) {
-        id -> Int4,
-        user_id -> Int4,
-        solution_id -> Int4,
+        id -> Int8,
+        user_id -> Int8,
+        solution_id -> Int8,
         created_at -> Timestamp,
         updated_at -> Timestamp,
     }
@@ -82,10 +82,10 @@ diesel::table! {
 
 diesel::table! {
     solution_like (id) {
-        id -> Int4,
+        id -> Int8,
         option -> Text,
-        solution_id -> Int4,
-        user_id -> Int4,
+        solution_id -> Int8,
+        user_id -> Int8,
         created_at -> Timestamp,
         updated_at -> Timestamp,
     }
@@ -93,7 +93,7 @@ diesel::table! {
 
 diesel::table! {
     users (id) {
-        id -> Int4,
+        id -> Int8,
         name -> Nullable<Text>,
         give_name -> Nullable<Text>,
         email -> Nullable<Text>,

@@ -130,7 +130,7 @@ impl FromSql<Text, Pg> for Status {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Featured {
-    pub id: i32,
+    pub id: i64,
     pub expired: bool,
     pub expiring_date: NaiveDateTime,
     pub created_at: NaiveDateTime,
@@ -144,13 +144,13 @@ pub struct Featured {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Problem {
-    pub id: i32,
+    pub id: i64,
     pub anonymous: bool,
-    pub user_id: i32,
+    pub user_id: i64,
     pub title: String,
     pub description: String,
     pub flag: ModeratorFlags,
-    pub featured_id: Option<i32>,
+    pub featured_id: Option<i64>,
     pub category: Category,
     pub sub_category: Option<String>,
     pub status: Status,
