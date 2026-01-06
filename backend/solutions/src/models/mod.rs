@@ -47,10 +47,10 @@ impl FromSql<Text, Pg> for SolutionType {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Solution {
-    pub id: i32,
+    pub id: i64,
     pub content: String,
-    pub user_id: i32,
-    pub problem_id: i32,
+    pub user_id: i64,
+    pub problem_id: i64,
     pub solution_type: SolutionType,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
