@@ -48,10 +48,10 @@ impl FromSql<Text, Pg> for LikeType {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProblemLike {
-    pub id: i32,
+    pub id: i64,
     pub option: LikeType,
-    pub problem_id: i32,
-    pub user_id: i32,
+    pub problem_id: i64,
+    pub user_id: i64,
     pub created_at: NaiveDateTime,
 }
 
@@ -62,10 +62,10 @@ pub struct ProblemLike {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SolutionLike {
-    pub id: i32,
+    pub id: i64,
     pub option: LikeType,
-    pub solution_id: i32,
-    pub user_id: i32,
+    pub solution_id: i64,
+    pub user_id: i64,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
 }
@@ -77,9 +77,9 @@ pub struct SolutionLike {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProblemView {
-    pub id: i32,
-    pub user_id: i32,
-    pub problem_id: i32,
+    pub id: i64,
+    pub user_id: i64,
+    pub problem_id: i64,
     pub created_at: NaiveDateTime,
 }
 
@@ -90,9 +90,9 @@ pub struct ProblemView {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProblemFavourite {
-    pub id: i32,
-    pub user_id: i32,
-    pub problem_id: i32,
+    pub id: i64,
+    pub user_id: i64,
+    pub problem_id: i64,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
 }
@@ -104,9 +104,9 @@ pub struct ProblemFavourite {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SolutionFavourite {
-    pub id: i32,
-    pub user_id: i32,
-    pub solution_id: i32,
+    pub id: i64,
+    pub user_id: i64,
+    pub solution_id: i64,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
 }
