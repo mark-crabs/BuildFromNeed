@@ -1,20 +1,15 @@
 pub mod middleware;
-pub mod views;
 pub mod urls;
+pub mod views;
+use self::urls::auth_urls;
 use actix_web::{App, HttpResponse, HttpServer, Responder, get, middleware::Logger, web};
 use env_logger::Env;
-use utils::{
-    config::AppState, ssl::ssl_builder_creation
-};
-use self::urls::auth_urls;
-
+use utils::{config::AppState, ssl::ssl_builder_creation};
 
 #[get("/")]
 async fn health_check() -> impl Responder {
     HttpResponse::Ok().body("Up")
 }
-
-
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -22,7 +17,9 @@ async fn main() -> std::io::Result<()> {
     let app_state = web::Data::new(AppState::new());
     let server_port = app_state.env.server.port;
 
-    let builder = ssl_builder_creation().await.expect("Failed to create ssl builder.");
+    let builder = ssl_builder_creation()
+        .await
+        .expect("Failed to create ssl builder.");
 
     HttpServer::new(move || {
         App::new()

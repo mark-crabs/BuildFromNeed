@@ -1,7 +1,7 @@
 pub struct ENV {
     pub server: Server,
     pub database_url: String,
-    pub oauth: Oauth2
+    pub oauth: Oauth2,
 }
 
 impl ENV {
@@ -9,7 +9,7 @@ impl ENV {
         Self {
             server,
             database_url,
-            oauth
+            oauth,
         }
     }
 }
@@ -19,17 +19,23 @@ pub struct Oauth2 {
     pub client_secret: String,
     pub domain: String,
     pub region: String,
-    pub pool_id: String
+    pub pool_id: String,
 }
 
 impl Oauth2 {
-    pub fn new(client_id: String, client_secret: String, domain: String, region: String, pool_id: String) -> Self {
+    pub fn new(
+        client_id: String,
+        client_secret: String,
+        domain: String,
+        region: String,
+        pool_id: String,
+    ) -> Self {
         Self {
             client_id,
             client_secret,
             domain,
-            region, 
-            pool_id
+            region,
+            pool_id,
         }
     }
 }
