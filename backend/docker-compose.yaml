@@ -1,10 +1,18 @@
+version: "3"
 services:
-  database:
+  buildfromneedbackend:
+    build:
+      context: .
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+  postgres:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: "${DATABASE_USER}"
-      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
-      POSTGRES_DB: buildfromneed
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "buildfromneed"
     ports:
-      - "5400:5432"
+      - "5401:5432"
