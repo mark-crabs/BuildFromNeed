@@ -94,12 +94,12 @@ diesel::table! {
 diesel::table! {
     users (id) {
         id -> Int4,
-        first_name -> Nullable<Text>,
-        last_name -> Nullable<Text>,
+        name -> Nullable<Text>,
+        give_name -> Nullable<Text>,
         email -> Nullable<Text>,
-        password -> Nullable<Text>,
+        email_verified -> Nullable<Bool>,
+        picture -> Nullable<Text>,
         role -> Text,
-        registration_option -> Text,
         archive -> Bool,
         created_at -> Timestamp,
         updated_at -> Timestamp,
