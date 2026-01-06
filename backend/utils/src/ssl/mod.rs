@@ -1,6 +1,5 @@
-use openssl::ssl::{SslAcceptor, SslAcceptorBuilder, SslFiletype, SslMethod};
 use anyhow::Result;
-
+use openssl::ssl::{SslAcceptor, SslAcceptorBuilder, SslFiletype, SslMethod};
 
 pub async fn ssl_builder_creation() -> Result<SslAcceptorBuilder> {
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();

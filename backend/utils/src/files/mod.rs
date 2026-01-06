@@ -12,6 +12,12 @@ pub fn load_env() -> Result<ENV> {
     Ok(ENV::new(
         env::var("DATABASE_URL")?,
         Server::new(env::var("SERVER_PORT")?.parse()?),
-        Oauth2::new(env::var("OAUTH_CLIENT_ID")? ,env::var("OAUTH_CLIENT_SECRET")?,env::var("OAUTH_DOMAIN")?, env::var("OAUTH_REGION")?, env::var("OAUTH_POOL_ID")?)
+        Oauth2::new(
+            env::var("OAUTH_CLIENT_ID")?,
+            env::var("OAUTH_CLIENT_SECRET")?,
+            env::var("OAUTH_DOMAIN")?,
+            env::var("OAUTH_REGION")?,
+            env::var("OAUTH_POOL_ID")?,
+        ),
     ))
 }

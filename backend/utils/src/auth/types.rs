@@ -29,5 +29,5 @@ pub struct Claims {
 pub struct TokenBody {
     pub code: String,
     pub code_verifier: String,
-    pub redirect_uri: String
+    pub redirect_uri: String,
 }
