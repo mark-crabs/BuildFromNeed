@@ -4,6 +4,7 @@ CREATE TABLE solution (
     user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     problem_id BIGINT NOT NULL REFERENCES problem(id) ON DELETE CASCADE,
     solution_type TEXT NOT NULL CHECK (solution_type IN ('Solution', 'Comment')) DEFAULT 'Comment',
+    archive BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
