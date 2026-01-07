@@ -65,6 +65,7 @@ diesel::table! {
         user_id -> Int8,
         problem_id -> Int8,
         solution_type -> Text,
+        archive -> Bool,
         created_at -> Timestamp,
         updated_at -> Timestamp,
     }
