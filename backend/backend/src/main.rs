@@ -1,6 +1,9 @@
+pub mod dto;
 pub mod middleware;
 pub mod urls;
 pub mod views;
+
+use self::middleware::AuthorizationBase;
 use self::urls::auth_urls;
 use actix_web::{App, HttpResponse, HttpServer, Responder, get, middleware::Logger, web};
 use env_logger::Env;
@@ -8,6 +11,7 @@ use utils::{config::AppState, ssl::ssl_builder_creation};
 
 #[get("/")]
 async fn health_check() -> impl Responder {
+    // some();
     HttpResponse::Ok().body("Up")
 }
 
@@ -23,6 +27,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
+            .wrap(AuthorizationBase)
             .app_data(app_state.clone())
             .service(auth_urls())
             .service(users::urls::urls())

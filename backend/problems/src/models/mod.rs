@@ -9,7 +9,6 @@ use diesel::{
 };
 use serde::{Deserialize, Serialize};
 use std::io::Write;
-use users::models::User;
 
 #[derive(
     Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, AsExpression, FromSqlRow, Default,
@@ -137,7 +136,7 @@ pub struct Featured {
     pub updated_at: NaiveDateTime,
 }
 
-#[derive(Queryable, Selectable)]
+#[derive(Queryable, Selectable, AsChangeset, Identifiable)]
 #[diesel(table_name = utils::db::schema::problem)]
 #[diesel(belongs_to(User,  foreign_key = user_id))]
 #[diesel(belongs_to(Featured, foreign_key = featured_id))]

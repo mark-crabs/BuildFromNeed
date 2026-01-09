@@ -11,6 +11,16 @@ diesel::table! {
 }
 
 diesel::table! {
+    oauth_requests (id) {
+        id -> Int8,
+        pkce_challenge -> Text,
+        pkce_verifier -> Text,
+        csrf_state -> Text,
+        created_at -> Timestamp,
+    }
+}
+
+diesel::table! {
     problem (id) {
         id -> Int8,
         anonymous -> Bool,
@@ -123,6 +133,7 @@ diesel::joinable!(solution_like -> users (user_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     featured,
+    oauth_requests,
     problem,
     problem_favourite,
     problem_like,
