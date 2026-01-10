@@ -7,11 +7,8 @@ use diesel::{
     serialize::{self, IsNull, Output, ToSql},
     sql_types::Text,
 };
-use problems::models::Problem;
 use serde::{Deserialize, Serialize};
-use solutions::models::Solution;
 use std::io::Write;
-use users::models::User;
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, AsExpression, FromSqlRow)]
 #[diesel(sql_type = Text)]
@@ -47,6 +44,7 @@ impl FromSql<Text, Pg> for LikeType {
 #[diesel(belongs_to(Problem, foreign_key = problem_id))]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 #[derive(Debug, Serialize, Deserialize)]
+// FIX DUPLICATES
 pub struct ProblemLike {
     pub id: i64,
     pub option: LikeType,

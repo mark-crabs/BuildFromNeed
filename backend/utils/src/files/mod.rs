@@ -16,8 +16,8 @@ pub fn load_env() -> Result<ENV> {
             env::var("OAUTH_CLIENT_ID")?,
             env::var("OAUTH_CLIENT_SECRET")?,
             env::var("OAUTH_DOMAIN")?,
-            env::var("OAUTH_REGION")?,
-            env::var("OAUTH_POOL_ID")?,
+            env::var("OAUTH_REDIRECT_URL")?,
         ),
+        env::var("JWT_SECRET")?,
     ))
 }

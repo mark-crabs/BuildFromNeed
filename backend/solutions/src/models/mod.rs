@@ -7,10 +7,8 @@ use diesel::{
     serialize::{self, IsNull, Output, ToSql},
     sql_types::Text,
 };
-use problems::models::Problem;
 use serde::{Deserialize, Serialize};
 use std::io::Write;
-use users::models::User;
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, AsExpression, FromSqlRow)]
 #[diesel(sql_type = Text)]
@@ -40,7 +38,7 @@ impl FromSql<Text, Pg> for SolutionType {
     }
 }
 
-#[derive(Queryable, Selectable)]
+#[derive(Queryable, Selectable, AsChangeset, Identifiable)]
 #[diesel(table_name = utils::db::schema::solution)]
 #[diesel(belongs_to(User,  foreign_key = user_id))]
 #[diesel(belongs_to(Problem, foreign_key = problem_id))]
@@ -52,6 +50,7 @@ pub struct Solution {
     pub user_id: i64,
     pub problem_id: i64,
     pub solution_type: SolutionType,
+    pub archive: bool,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
 }
