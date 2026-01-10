@@ -3528,6 +3528,7 @@ dependencies = [
  "actix-web",
  "chrono",
  "diesel",
+ "jsonwebtoken",
  "serde",
  "utils",
 ]

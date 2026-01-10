@@ -9,3 +9,4 @@ actix-web = { workspace = true }
 utils = { workspace = true }
 diesel = { workspace = true }
 chrono = { workspace = true }
+jsonwebtoken = { workspace = true }
