@@ -1,7 +1,7 @@
-use actix_web::HttpMessage;
+use actix_web::{HttpMessage, dev::Extensions, http::header::{HeaderName, HeaderValue}};
 use std::{
     future::{Ready, ready},
-    pin::Pin,
+    pin::Pin, str::FromStr,
 };
 
 use actix_web::{
@@ -44,7 +44,7 @@ where
     type Error = Error;
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
     actix_web::dev::forward_ready!(service);
-    fn call(&self, mut req: ServiceRequest) -> Self::Future {
+    fn call(&self, req: ServiceRequest) -> Self::Future {
 
 
         let auth_header = req.headers().get("Authorization");
@@ -57,7 +57,7 @@ where
                 if let Some(data) = data {
                     match Claims::decode_jwt(token, &data.env.jwt_secret) {
                         Ok(claims) => {
-                            req.extensions_mut().insert(claims);
+                           
                         },
                         Err(_) => {}
                     }
