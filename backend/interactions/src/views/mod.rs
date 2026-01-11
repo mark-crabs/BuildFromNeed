@@ -7,7 +7,7 @@ use crate::{
         SolutionFavourite as SolutionFavouriteModel, SolutionLike as SolutionLikeModel,
     },
 };
-use actix_web::{HttpResponse, Responder, get, post, web};
+use actix_web::{HttpRequest, HttpResponse, Responder, get, post, web};
 use diesel::pg::PgConnection;
 use diesel::r2d2::ConnectionManager;
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl, r2d2::PooledConnection};
@@ -16,14 +16,16 @@ use utils::{
     db::schema::{
         problem_favourite, problem_like, problem_view, solution_favourite, solution_like,
     },
-    dto::{DataResponse, Pagination},
+    dto::{Claims, DataResponse, Pagination},
 };
 
 // FIND A WAY TO MAKE THE LIKE AND DISLIKE FEATURE EXTENDABLE SAME AS FAV/UNFAV
 #[get("/problem-likes")]
 pub async fn get_problem_likes(
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
 
@@ -46,7 +48,9 @@ pub async fn get_problem_likes(
 pub async fn like_a_problem(
     web::Query(revoke): web::Query<LikeRevoke>,
     data: web::Json<ProblemLike>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -60,7 +64,9 @@ pub async fn like_a_problem(
 #[get("/solution-likes")]
 pub async fn get_solution_likes(
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     match state.db_pool.get() {
@@ -81,7 +87,9 @@ pub async fn get_solution_likes(
 #[post("/solution-like")]
 pub async fn like_a_solution(
     data: web::Json<SolutionLike>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -95,7 +103,9 @@ pub async fn like_a_solution(
 #[post("/problem-view")]
 pub async fn view_a_problem(
     data: web::Json<ProblemView>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -113,7 +123,9 @@ pub async fn view_a_problem(
 #[get("problem-favourites")]
 pub async fn get_problems_favourites(
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     match state.db_pool.get() {
@@ -134,7 +146,9 @@ pub async fn get_problems_favourites(
 pub async fn get_problem_favourites_by_id(
     path: web::Path<i64>,
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     let problem_id = path.into_inner();
@@ -156,7 +170,9 @@ pub async fn get_problem_favourites_by_id(
 #[post("problem-favourite")]
 pub async fn favourite_a_problem(
     data: web::Json<ProblemFavourite>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -170,7 +186,9 @@ pub async fn favourite_a_problem(
 #[get("solution-favourites")]
 pub async fn get_solutions_favourites(
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     match state.db_pool.get() {
@@ -191,7 +209,9 @@ pub async fn get_solutions_favourites(
 pub async fn get_solution_favourites_by_id(
     path: web::Path<i64>,
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     let solution_id = path.into_inner();
@@ -213,7 +233,9 @@ pub async fn get_solution_favourites_by_id(
 #[post("solution-favourite")]
 pub async fn favourite_a_solution(
     data: web::Json<SolutionFavourite>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {

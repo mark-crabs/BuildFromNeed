@@ -1,13 +1,11 @@
-use ::users::{
-    dto::AddUser,
-    models::{User},
-};
+use ::users::{dto::AddUser, models::User};
 use actix_web::{HttpResponse, Responder, get, http::header::LOCATION, web};
 use anyhow::Result;
 use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD};
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl};
 use oauth2::{CsrfToken, PkceCodeChallenge};
 use reqwest::Client;
+use utils::models::Role;
 use utils::{
     auth::{GoogleClaims, GoogleTokenResponse},
     config::AppState,
@@ -15,7 +13,6 @@ use utils::{
     dto::{AddOauthRequest, DataResponse},
     models::OauthRequests,
 };
-use utils::models::Role;
 
 use crate::dto::{AuthRequest, Tokens};
 use utils::dto::Claims;
@@ -23,6 +20,7 @@ use utils::dto::Claims;
 #[get("/google/callback")]
 pub async fn google_redirect(
     query: web::Query<AuthRequest>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
 ) -> impl Responder {
     let oauth = &state.env.oauth;
@@ -91,7 +89,10 @@ pub async fn google_redirect(
 }
 
 #[get("/token")]
-pub async fn get_tokens(state: web::Data<AppState>) -> impl Responder {
+pub async fn get_tokens(
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+) -> impl Responder {
     let oauth = &state.env.oauth;
     let csrf_state = CsrfToken::new_random();
     let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();

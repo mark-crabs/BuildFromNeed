@@ -1,26 +1,30 @@
-use actix_web::HttpMessage;
 use crate::{
     dto::{AddUser, UpdateUser},
     models::User,
 };
+use actix_web::HttpMessage;
 use actix_web::{HttpRequest, HttpResponse, Responder, delete, get, patch, post, web};
 use diesel::{
     ExpressionMethods, RunQueryDsl,
     query_dsl::methods::{FilterDsl, LimitDsl, OffsetDsl, OrderDsl},
 };
+use jsonwebtoken::TokenData;
 use utils::{
     config::AppState,
     db::schema::users,
-    dto::{DataResponse, Pagination, Claims},
+    dto::{Claims, DataResponse, Pagination},
 };
-
 
 #[get("")]
 pub async fn get_users(
     web::Query(pagination): web::Query<Pagination>,
-    state: web::Data<AppState>, req: HttpRequest
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
+
+    println!("{:#?}", claims);
 
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -37,7 +41,12 @@ pub async fn get_users(
 }
 
 #[get("/{user_id}")]
-pub async fn get_user_by_id(path: web::Path<i64>, state: web::Data<AppState>) -> impl Responder {
+pub async fn get_user_by_id(
+    path: web::Path<i64>,
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+    req: HttpRequest,
+) -> impl Responder {
     let user_id = path.into_inner();
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -52,7 +61,12 @@ pub async fn get_user_by_id(path: web::Path<i64>, state: web::Data<AppState>) ->
 }
 
 #[post("")]
-pub async fn add_user(data: web::Json<AddUser>, state: web::Data<AppState>) -> impl Responder {
+pub async fn add_user(
+    data: web::Json<AddUser>,
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+    req: HttpRequest,
+) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
             diesel::insert_into(users::dsl::users)
@@ -70,7 +84,9 @@ pub async fn add_user(data: web::Json<AddUser>, state: web::Data<AppState>) -> i
 pub async fn update_user_by_id(
     path: web::Path<i64>,
     data: web::Json<UpdateUser>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let user_id = path.into_inner();
     match state.db_pool.get() {
@@ -94,7 +110,12 @@ pub async fn update_user_by_id(
 }
 
 #[delete("/{user_id}")]
-pub async fn delete_user_by_id(path: web::Path<i64>, state: web::Data<AppState>) -> impl Responder {
+pub async fn delete_user_by_id(
+    path: web::Path<i64>,
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+    req: HttpRequest,
+) -> impl Responder {
     let user_id = path.into_inner();
     match state.db_pool.get() {
         Ok(mut connection) => {

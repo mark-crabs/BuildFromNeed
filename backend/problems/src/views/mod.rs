@@ -1,7 +1,8 @@
-use actix_web::{HttpResponse, Responder, delete, get, patch, post, web};
+use actix_web::{HttpRequest, HttpResponse, Responder, delete, get, patch, post, web};
 use diesel::ExpressionMethods;
 use diesel::{JoinOnDsl, NullableExpressionMethods, QueryDsl, RunQueryDsl};
 use utils::db::schema::users;
+use utils::dto::Claims;
 use utils::{
     config::AppState,
     db::schema::problem,
@@ -16,7 +17,9 @@ use crate::models::Problem;
 #[get("")]
 pub async fn get_problems(
     web::Query(pagination): web::Query<Pagination>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let pagination = pagination.limit_and_offset();
     match state.db_pool.get() {
@@ -52,7 +55,12 @@ pub async fn get_problems(
 }
 
 #[get("/{problem_id}")]
-pub async fn get_problem_by_id(path: web::Path<i64>, state: web::Data<AppState>) -> impl Responder {
+pub async fn get_problem_by_id(
+    path: web::Path<i64>,
+    claims: web::ReqData<Option<Claims>>,
+    state: web::Data<AppState>,
+    req: HttpRequest,
+) -> impl Responder {
     let problem_id = path.into_inner();
 
     match state.db_pool.get() {
@@ -91,7 +99,9 @@ pub async fn get_problem_by_id(path: web::Path<i64>, state: web::Data<AppState>)
 #[post("")]
 pub async fn add_a_problem(
     data: web::Json<AddProblem>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     match state.db_pool.get() {
         Ok(mut connection) => {
@@ -109,7 +119,9 @@ pub async fn add_a_problem(
 pub async fn update_problem_by_id(
     path: web::Path<i64>,
     data: web::Json<UpdateProblem>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let problem_id = path.into_inner();
     match state.db_pool.get() {
@@ -135,7 +147,9 @@ pub async fn update_problem_by_id(
 #[delete("/{problem_id}")]
 pub async fn delete_problem_by_id(
     path: web::Path<i64>,
+    claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
+    req: HttpRequest,
 ) -> impl Responder {
     let problem_id = path.into_inner();
     match state.db_pool.get() {

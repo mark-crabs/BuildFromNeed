@@ -1,11 +1,18 @@
-use actix_web::{HttpMessage, dev::Extensions, http::header::{HeaderName, HeaderValue}};
+use actix_web::{
+    HttpMessage,
+    dev::Extensions,
+    http::header::{HeaderName, HeaderValue},
+};
 use std::{
     future::{Ready, ready},
-    pin::Pin, str::FromStr,
+    pin::Pin,
+    str::FromStr,
 };
 
 use actix_web::{
-    Error, HttpResponse, dev::{Service, ServiceRequest, ServiceResponse, Transform}, web
+    Error, HttpResponse,
+    dev::{Service, ServiceRequest, ServiceResponse, Transform},
+    web,
 };
 use utils::config::AppState;
 
@@ -45,16 +52,13 @@ where
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
     actix_web::dev::forward_ready!(service);
     fn call(&self, req: ServiceRequest) -> Self::Future {
-
         let claims = extract_claims(&req);
 
         req.extensions_mut().insert(claims);
 
         let fut = self.service.call(req);
 
-        Box::pin(async move {
-            fut.await
-        })
+        Box::pin(async move { fut.await })
     }
 }
 
