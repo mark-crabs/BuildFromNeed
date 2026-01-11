@@ -57,7 +57,7 @@ where
                 if let Some(data) = data {
                     match Claims::decode_jwt(token, &data.env.jwt_secret) {
                         Ok(claims) => {
-                           
+                            req.extensions_mut().insert(claims.claims);
                         },
                         Err(_) => {}
                     }
