@@ -9,37 +9,8 @@ use diesel::{
 };
 use serde::{Deserialize, Serialize};
 use std::io::Write;
+use utils::models::Role;
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, AsExpression, FromSqlRow)]
-#[diesel(sql_type = Text)]
-pub enum Role {
-    Admin,
-    Casual,
-    Moderator,
-}
-
-impl ToSql<Text, Pg> for Role {
-    fn to_sql<'b>(&'b self, out: &mut Output<'b, '_, Pg>) -> serialize::Result {
-        let value = match self {
-            Role::Admin => "Admin",
-            Role::Casual => "Casual",
-            Role::Moderator => "Moderator",
-        };
-        out.write_all(value.as_bytes())?;
-        Ok(IsNull::No)
-    }
-}
-
-impl FromSql<Text, Pg> for Role {
-    fn from_sql(bytes: diesel::pg::PgValue<'_>) -> deserialize::Result<Self> {
-        match bytes.as_bytes() {
-            b"Admin" => Ok(Role::Admin),
-            b"Casual" => Ok(Role::Casual),
-            b"Moderator" => Ok(Role::Moderator),
-            _ => Err("Unrecognized role variant".into()),
-        }
-    }
-}
 
 #[derive(Queryable, Selectable, AsChangeset, Identifiable)]
 #[diesel(table_name = utils::db::schema::users)]

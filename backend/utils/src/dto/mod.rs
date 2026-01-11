@@ -1,7 +1,11 @@
+use crate::db::schema::oauth_requests;
 use actix_web::error;
 use derive_more::derive::{Display, Error};
+use diesel::prelude::*;
+use jsonwebtoken::{DecodingKey, EncodingKey, Header, TokenData, Validation, decode, encode};
 use serde::{Deserialize, Serialize};
-
+use crate::models::Role;
+use chrono::{Duration, Utc};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Pagination {
     pub page: Option<u32>,
@@ -48,3 +52,56 @@ impl<T> DataResponse<T> {
 }
 
 impl error::ResponseError for ErrorResponse {}
+
+#[derive(Deserialize, Insertable, Serialize)]
+#[diesel(table_name = oauth_requests)]
+pub struct AddOauthRequest {
+    pub pkce_challenge: String,
+    pub pkce_verifier: String,
+    pub csrf_state: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct Claims {
+    pub name: Option<String>,
+    pub email: Option<String>,
+    pub role: Role,
+    pub picture: Option<String>,
+    pub iss: String,
+    pub iat: i64,
+    pub exp: i64,
+}
+
+impl Claims {
+    pub fn new(
+        name: Option<String>,
+        email: Option<String>,
+        role: Role,
+        picture: Option<String>,
+        iss: &String,
+    ) -> Self {
+        let now = Utc::now();
+        let iat = now.timestamp();
+        let exp = (now + Duration::days(1)).timestamp();
+
+        Self {
+            name,
+            email,
+            role,
+            picture,
+            iss: iss.to_string(),
+            iat,
+            exp,
+        }
+    }
+
+    pub fn get_jwt(&self, key: &String) -> String {
+        let key = EncodingKey::from_secret(key.as_bytes());
+        let token = encode(&Header::default(), self, &key).unwrap();
+        token
+    }
+    pub fn decode_jwt(token: &str, key: &String) -> Result<TokenData<Claims>, jsonwebtoken::errors::Error> {
+        let key = DecodingKey::from_secret(key.as_bytes());
+        decode::<Claims>(token, &key, &Validation::default())
+    }
+}
