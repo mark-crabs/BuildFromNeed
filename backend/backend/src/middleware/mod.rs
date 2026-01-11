@@ -46,33 +46,27 @@ where
     actix_web::dev::forward_ready!(service);
     fn call(&self, req: ServiceRequest) -> Self::Future {
 
+        let claims = extract_claims(&req);
 
-        let auth_header = req.headers().get("Authorization");
+        req.extensions_mut().insert(claims);
 
-        if let Some(bearer) = auth_header {
-            let token: Vec<&str> = bearer.to_str().unwrap().split("Bearer ").collect();
-            let data = req.app_data::<web::Data<AppState>>();
-            if token.len() == 2 {
-                let token = token.get(1).unwrap();
-                if let Some(data) = data {
-                    match Claims::decode_jwt(token, &data.env.jwt_secret) {
-                        Ok(claims) => {
-                            req.extensions_mut().insert(claims.claims);
-                        },
-                        Err(_) => {}
-                    }
-                }
-            }
-        } else {
+        let fut = self.service.call(req);
 
-        }
-        let future = self.service.call(req);
         Box::pin(async move {
-            let res = match future.await {
-                Ok(response) => response,
-                Err(error) => panic!("Unable to process middleware: {}", error),
-            };
-            Ok(res)
+            fut.await
         })
     }
+}
+
+fn extract_claims(req: &ServiceRequest) -> Option<Claims> {
+    let auth_header = req.headers().get(actix_web::http::header::AUTHORIZATION)?;
+    let auth_str = auth_header.to_str().ok()?;
+
+    let token = auth_str.strip_prefix("Bearer ")?;
+
+    let data = req.app_data::<web::Data<AppState>>()?;
+
+    let decoded = Claims::decode_jwt(token, &data.env.jwt_secret).ok()?;
+
+    Some(decoded.claims)
 }
