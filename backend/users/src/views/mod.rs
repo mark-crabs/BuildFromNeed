@@ -2,17 +2,16 @@ use crate::{
     dto::{AddUser, UpdateUser},
     models::User,
 };
-use actix_web::HttpMessage;
-use actix_web::{HttpRequest, HttpResponse, Responder, delete, get, patch, post, web};
+use actix_web::{HttpResponse, Responder, delete, get, patch, post, web};
 use diesel::{
     ExpressionMethods, RunQueryDsl,
     query_dsl::methods::{FilterDsl, LimitDsl, OffsetDsl, OrderDsl},
 };
-use jsonwebtoken::TokenData;
 use utils::{
     config::AppState,
     db::schema::users,
     dto::{Claims, DataResponse, Pagination},
+    models::Role,
 };
 
 #[get("")]
@@ -20,12 +19,14 @@ pub async fn get_users(
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
-    req: HttpRequest,
 ) -> impl Responder {
-
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
         Some(claims) => {
+            if claims.role != Role::Admin && claims.role != Role::Moderator {
+                return HttpResponse::Forbidden().finish();
+            }
+
             let pagination = pagination.limit_and_offset();
 
             match state.db_pool.get() {
@@ -42,7 +43,6 @@ pub async fn get_users(
             }
         }
     }
-
 }
 
 #[get("/{user_id}")]
@@ -50,9 +50,7 @@ pub async fn get_user_by_id(
     path: web::Path<i64>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
-    req: HttpRequest,
 ) -> impl Responder {
-
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
         Some(claims) => {
@@ -63,25 +61,34 @@ pub async fn get_user_by_id(
                         .filter(users::id.eq(user_id))
                         .get_result(&mut connection)
                         .unwrap();
+
+                    if user.email != claims.email {
+                        if claims.role != Role::Admin {
+                            return HttpResponse::Forbidden().finish();
+                        }
+                    }
+
                     HttpResponse::Ok().json(DataResponse::new(user))
                 }
                 Err(_) => HttpResponse::InternalServerError().finish(),
             }
         }
-        }
     }
-
+}
 
 #[post("")]
 pub async fn add_user(
     data: web::Json<AddUser>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
-    req: HttpRequest,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => {
+            if claims.role != Role::Admin {
+                return HttpResponse::Forbidden();
+            }
+
             match state.db_pool.get() {
                 Ok(mut connection) => {
                     diesel::insert_into(users::dsl::users)
@@ -91,7 +98,7 @@ pub async fn add_user(
                     HttpResponse::Created()
                 }
                 Err(_) => HttpResponse::InternalServerError(),
-            } 
+            }
         }
     }
 }
@@ -103,10 +110,9 @@ pub async fn update_user_by_id(
     data: web::Json<UpdateUser>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
-    req: HttpRequest,
 ) -> impl Responder {
     match claims.into_inner() {
-        None => HttpResponse::Unauthorized(), 
+        None => HttpResponse::Unauthorized(),
         Some(claims) => {
             let user_id = path.into_inner();
             match state.db_pool.get() {
@@ -115,33 +121,42 @@ pub async fn update_user_by_id(
                         .filter(users::id.eq(user_id))
                         .first(&mut connection)
                         .unwrap();
-        
+
                     data.populate_user(&mut user);
-        
+
+                    if claims.email != user.email {
+                        if claims.role != Role::Admin {
+                            return HttpResponse::Forbidden();
+                        }
+                    }
+
                     diesel::update(&user)
                         .set(&user)
                         .get_result::<User>(&mut connection)
                         .unwrap();
-        
+
                     HttpResponse::Ok()
                 }
                 Err(_) => HttpResponse::InternalServerError(),
             }
         }
     }
-
 }
 
+// TODO A USER CAN DEACTIVATE THEIR ACCOUNT
 #[delete("/{user_id}")]
 pub async fn delete_user_by_id(
     path: web::Path<i64>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
-    req: HttpRequest,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => {
+            if claims.role != Role::Admin {
+                return HttpResponse::Forbidden();
+            }
+
             let user_id = path.into_inner();
             match state.db_pool.get() {
                 Ok(mut connection) => {
@@ -158,5 +173,4 @@ pub async fn delete_user_by_id(
             }
         }
     }
-
 }

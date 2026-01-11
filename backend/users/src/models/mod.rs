@@ -1,14 +1,8 @@
 use chrono::NaiveDateTime;
 use diesel::{
-    deserialize::{self, FromSql, FromSqlRow},
-    expression::AsExpression,
-    pg::Pg,
     prelude::*,
-    serialize::{self, IsNull, Output, ToSql},
-    sql_types::Text,
 };
 use serde::{Deserialize, Serialize};
-use std::io::Write;
 use utils::models::Role;
 
 #[derive(Queryable, Selectable, AsChangeset, Identifiable)]
