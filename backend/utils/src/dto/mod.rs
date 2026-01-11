@@ -1,11 +1,11 @@
 use crate::db::schema::oauth_requests;
+use crate::models::Role;
 use actix_web::error;
+use chrono::{Duration, Utc};
 use derive_more::derive::{Display, Error};
 use diesel::prelude::*;
 use jsonwebtoken::{DecodingKey, EncodingKey, Header, TokenData, Validation, decode, encode};
 use serde::{Deserialize, Serialize};
-use crate::models::Role;
-use chrono::{Duration, Utc};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Pagination {
     pub page: Option<u32>,
@@ -100,7 +100,10 @@ impl Claims {
         let token = encode(&Header::default(), self, &key).unwrap();
         token
     }
-    pub fn decode_jwt(token: &str, key: &String) -> Result<TokenData<Claims>, jsonwebtoken::errors::Error> {
+    pub fn decode_jwt(
+        token: &str,
+        key: &String,
+    ) -> Result<TokenData<Claims>, jsonwebtoken::errors::Error> {
         let key = DecodingKey::from_secret(key.as_bytes());
         decode::<Claims>(token, &key, &Validation::default())
     }

@@ -1,4 +1,4 @@
-use crate::models::{User};
+use crate::models::User;
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 use utils::{auth::GoogleClaims, db::schema::users, models::Role};

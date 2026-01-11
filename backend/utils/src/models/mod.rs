@@ -30,7 +30,6 @@ pub enum Role {
     Moderator,
 }
 
-
 impl ToSql<Text, Pg> for Role {
     fn to_sql<'b>(&'b self, out: &mut Output<'b, '_, Pg>) -> serialize::Result {
         let value = match self {

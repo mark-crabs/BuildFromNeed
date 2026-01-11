@@ -11,7 +11,6 @@ use serde::{Deserialize, Serialize};
 use std::io::Write;
 use utils::models::Role;
 
-
 #[derive(Queryable, Selectable, AsChangeset, Identifiable)]
 #[diesel(table_name = utils::db::schema::users)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
