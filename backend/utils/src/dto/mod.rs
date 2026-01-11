@@ -70,10 +70,12 @@ pub struct Claims {
     pub iss: String,
     pub iat: i64,
     pub exp: i64,
+    pub user_id: i64,
 }
 
 impl Claims {
     pub fn new(
+        user_id: i64,
         name: Option<String>,
         email: Option<String>,
         role: Role,
@@ -92,6 +94,7 @@ impl Claims {
             iss: iss.to_string(),
             iat,
             exp,
+            user_id,
         }
     }
 

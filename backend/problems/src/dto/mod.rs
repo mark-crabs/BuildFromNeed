@@ -13,7 +13,7 @@ pub struct AddProblem {
     pub category: Category,
     pub sub_category: Option<String>,
     pub public: bool,
-    pub user_id: Option<i64>,
+    pub user_id: i64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

@@ -20,8 +20,7 @@ use utils::dto::Claims;
 #[get("/google/callback")]
 pub async fn google_redirect(
     query: web::Query<AuthRequest>,
-    claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>,
+    state: web::Data<AppState>
 ) -> impl Responder {
     let oauth = &state.env.oauth;
     match state.db_pool.get() {
@@ -54,11 +53,12 @@ pub async fn google_redirect(
                     if users.is_empty() {
                         let user_add: AddUser = claims.clone().into();
 
-                        diesel::insert_into(users::dsl::users)
+                        let user: User = diesel::insert_into(users::dsl::users)
                             .values(&user_add)
-                            .execute(&mut connection)
+                            .get_result(&mut connection)
                             .unwrap();
                         access = Claims::new(
+                            user.id,
                             claims.name,
                             email,
                             Role::Casual,
@@ -68,9 +68,10 @@ pub async fn google_redirect(
                         .get_jwt(&state.env.jwt_secret);
                     } else {
                         access = Claims::new(
+                            users.get(0).unwrap().id,
                             claims.name,
                             email,
-                            Role::Casual,
+                            users.get(0).unwrap().role,
                             claims.picture,
                             &oauth.client_id,
                         )
@@ -90,8 +91,7 @@ pub async fn google_redirect(
 
 #[get("/token")]
 pub async fn get_tokens(
-    claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>,
+    state: web::Data<AppState>
 ) -> impl Responder {
     let oauth = &state.env.oauth;
     let csrf_state = CsrfToken::new_random();
