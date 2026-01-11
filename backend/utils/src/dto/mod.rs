@@ -61,7 +61,7 @@ pub struct AddOauthRequest {
     pub csrf_state: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Claims {
     pub name: Option<String>,
     pub email: Option<String>,
