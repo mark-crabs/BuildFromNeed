@@ -3,20 +3,21 @@ use crate::{
         LikeRevoke, ProblemFavourite, ProblemLike, ProblemView, SolutionFavourite, SolutionLike,
     },
     models::{
-        ProblemFavourite as ProblemFavouriteModel, ProblemLike as ProblemLikeModel,
-        SolutionFavourite as SolutionFavouriteModel, SolutionLike as SolutionLikeModel,
+        ProblemFavourite as ProblemFavouriteModel, SolutionFavourite as SolutionFavouriteModel,
     },
 };
 use actix_web::{HttpResponse, Responder, get, post, web};
 use diesel::pg::PgConnection;
 use diesel::r2d2::ConnectionManager;
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl, r2d2::PooledConnection};
+use problems::models::{ProblemLike as ProblemLikeModel, SolutionLike as SolutionLikeModel};
 use utils::{
     config::AppState,
     db::schema::{
         problem_favourite, problem_like, problem_view, solution_favourite, solution_like,
     },
-    dto::{Claims, DataResponse, Pagination}, models::Role,
+    dto::{Claims, DataResponse, Pagination},
+    models::Role,
 };
 
 // FIND A WAY TO MAKE THE LIKE AND DISLIKE FEATURE EXTENDABLE SAME AS FAV/UNFAV
@@ -24,7 +25,7 @@ use utils::{
 pub async fn get_problem_likes(
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
@@ -33,7 +34,6 @@ pub async fn get_problem_likes(
 
             match state.db_pool.get() {
                 Ok(mut connection) => {
-
                     if claims.role != Role::Admin {
                         return HttpResponse::Forbidden().finish();
                     }
@@ -58,15 +58,14 @@ pub async fn like_a_problem(
     web::Query(revoke): web::Query<LikeRevoke>,
     data: web::Json<ProblemLike>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => match state.db_pool.get() {
             Ok(mut connection) => {
-
                 if claims.role != Role::Admin && data.user_id != claims.user_id {
-                    return HttpResponse::Forbidden()
+                    return HttpResponse::Forbidden();
                 }
 
                 like_and_unlike_a_problem(&data.0, &revoke, &mut connection);
@@ -81,7 +80,7 @@ pub async fn like_a_problem(
 pub async fn get_solution_likes(
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
@@ -89,11 +88,10 @@ pub async fn get_solution_likes(
             let pagination = pagination.limit_and_offset();
             match state.db_pool.get() {
                 Ok(mut connection) => {
-
                     if claims.role != Role::Admin {
                         return HttpResponse::Forbidden().finish();
                     }
-                    
+
                     let likes: Vec<SolutionLikeModel> = solution_like::dsl::solution_like
                         .order(solution_like::created_at.desc())
                         .limit(pagination.limit)
@@ -114,15 +112,14 @@ pub async fn like_a_solution(
     web::Query(revoke): web::Query<LikeRevoke>,
     data: web::Json<SolutionLike>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => match state.db_pool.get() {
             Ok(mut connection) => {
-
                 if claims.role != Role::Admin && data.user_id != claims.user_id {
-                    return HttpResponse::Forbidden()
+                    return HttpResponse::Forbidden();
                 }
 
                 like_and_unlike_a_solution(&data.0, &revoke, &mut connection);
@@ -137,7 +134,7 @@ pub async fn like_a_solution(
 pub async fn view_a_problem(
     data: web::Json<ProblemView>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
@@ -159,16 +156,14 @@ pub async fn view_a_problem(
 pub async fn get_problems_favourites(
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
         Some(claims) => {
-
             let pagination = pagination.limit_and_offset();
             match state.db_pool.get() {
                 Ok(mut connection) => {
-
                     let favs: Vec<ProblemFavouriteModel> = if claims.role == Role::Admin {
                         problem_favourite::dsl::problem_favourite
                             .order(problem_favourite::created_at.desc())
@@ -199,7 +194,7 @@ pub async fn get_problem_favourites_by_id(
     path: web::Path<i64>,
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
@@ -231,15 +226,14 @@ pub async fn get_problem_favourites_by_id(
 pub async fn favourite_a_problem(
     data: web::Json<ProblemFavourite>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => match state.db_pool.get() {
             Ok(mut connection) => {
-
                 if claims.role != Role::Admin && data.user_id != claims.user_id {
-                    return HttpResponse::Forbidden()
+                    return HttpResponse::Forbidden();
                 }
 
                 favourite_and_unfavourite_a_problem(&data.0, &mut connection);
@@ -254,7 +248,7 @@ pub async fn favourite_a_problem(
 pub async fn get_solutions_favourites(
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
@@ -262,23 +256,21 @@ pub async fn get_solutions_favourites(
             let pagination = pagination.limit_and_offset();
             match state.db_pool.get() {
                 Ok(mut connection) => {
-
-
                     let favs: Vec<SolutionFavouriteModel> = if claims.role == Role::Admin {
                         solution_favourite::dsl::solution_favourite
-                        .order(solution_favourite::created_at.desc())
-                        .limit(pagination.limit)
-                        .offset(pagination.offset)
-                        .load(&mut connection)
-                        .unwrap()
+                            .order(solution_favourite::created_at.desc())
+                            .limit(pagination.limit)
+                            .offset(pagination.offset)
+                            .load(&mut connection)
+                            .unwrap()
                     } else {
                         solution_favourite::dsl::solution_favourite
-                        .filter(solution_favourite::user_id.eq(claims.user_id))
-                        .order(solution_favourite::created_at.desc())
-                        .limit(pagination.limit)
-                        .offset(pagination.offset)
-                        .load(&mut connection)
-                        .unwrap()
+                            .filter(solution_favourite::user_id.eq(claims.user_id))
+                            .order(solution_favourite::created_at.desc())
+                            .limit(pagination.limit)
+                            .offset(pagination.offset)
+                            .load(&mut connection)
+                            .unwrap()
                     };
                     HttpResponse::Ok().json(DataResponse::new(favs))
                 }
@@ -293,7 +285,7 @@ pub async fn get_solution_favourites_by_id(
     path: web::Path<i64>,
     web::Query(pagination): web::Query<Pagination>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized().finish(),
@@ -325,14 +317,14 @@ pub async fn get_solution_favourites_by_id(
 pub async fn favourite_a_solution(
     data: web::Json<SolutionFavourite>,
     claims: web::ReqData<Option<Claims>>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     match claims.into_inner() {
         None => HttpResponse::Unauthorized(),
         Some(claims) => match state.db_pool.get() {
             Ok(mut connection) => {
                 if claims.role != Role::Admin && data.user_id != claims.user_id {
-                    return HttpResponse::Forbidden()
+                    return HttpResponse::Forbidden();
                 }
                 favourite_and_unfavourite_a_solution(&data.0, &mut connection);
                 HttpResponse::Created()

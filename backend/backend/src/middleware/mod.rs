@@ -1,12 +1,9 @@
 use actix_web::{
     HttpMessage,
-    dev::Extensions,
-    http::header::{HeaderName, HeaderValue},
 };
 use std::{
     future::{Ready, ready},
     pin::Pin,
-    str::FromStr,
 };
 
 use actix_web::{
