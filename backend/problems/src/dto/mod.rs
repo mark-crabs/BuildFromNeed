@@ -6,6 +6,37 @@ use diesel::sql_types::*;
 use serde::{Deserialize, Serialize};
 use utils::db::schema::{problem, problem_like};
 
+#[derive(Debug, QueryableByName, Deserialize, Serialize)]
+#[diesel(check_for_backend(diesel::pg::Pg))]
+pub struct SolutionWithOverview {
+    #[diesel(sql_type = BigInt)]
+    pub id: i64,
+
+    #[diesel(sql_type = BigInt)]
+    pub problem_id: i64,
+
+    #[diesel(sql_type = BigInt)]
+    pub user_id: i64,
+
+    #[diesel(sql_type = Text)]
+    pub content: String,
+
+    #[diesel(sql_type = Bool)]
+    pub archive: bool,
+
+    #[diesel(sql_type = Timestamp)]
+    pub created_at: NaiveDateTime,
+
+    #[diesel(sql_type = Timestamp)]
+    pub updated_at: NaiveDateTime,
+
+    #[diesel(sql_type = BigInt)]
+    pub upvotes: i64,
+
+    #[diesel(sql_type = BigInt)]
+    pub downvotes: i64,
+}
+
 #[derive(Deserialize, Insertable, Serialize)]
 #[diesel(table_name = problem)]
 pub struct AddProblem {
@@ -37,6 +68,18 @@ pub struct UpdateProblem {
     pub public: Option<bool>,
     pub archive: Option<bool>,
     pub user_id: Option<i64>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ProblemAndSolutions {
+    pub problem: ProblemWithUserOverview,
+    pub solution: Vec<SolutionWithOverview>,
+}
+
+impl ProblemAndSolutions {
+    pub fn new(problem: ProblemWithUserOverview, solution: Vec<SolutionWithOverview>) -> Self {
+        Self { problem, solution }
+    }
 }
 
 #[derive(Debug, QueryableByName, Serialize, Deserialize)]
@@ -96,7 +139,6 @@ pub struct ProblemWithUserOverview {
     #[diesel(sql_type = BigInt)]
     pub solution_count: i64,
 }
-
 
 impl UpdateProblem {
     pub fn populate_problem(&self, problem: &mut Problem) {

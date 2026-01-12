@@ -1,9 +1,9 @@
-use crate::models::{Solution, SolutionType};
 use chrono::NaiveDateTime;
 use diesel::{
     prelude::*,
     sql_types::{BigInt, Bool, Text, Timestamp},
 };
+use problems::models::{Solution, SolutionType};
 use serde::{Deserialize, Serialize};
 use utils::db::schema::solution;
 #[derive(Insertable, Deserialize, Serialize)]
@@ -14,38 +14,6 @@ pub struct AddSolution {
     pub problem_id: i64,
     pub solution_type: SolutionType,
 }
-
-#[derive(Debug, QueryableByName, Deserialize, Serialize)]
-#[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct SolutionWithOverview {
-    #[diesel(sql_type = BigInt)]
-    pub id: i64,
-
-    #[diesel(sql_type = BigInt)]
-    pub problem_id: i64,
-
-    #[diesel(sql_type = BigInt)]
-    pub user_id: i64,
-
-    #[diesel(sql_type = Text)]
-    pub content: String,
-
-    #[diesel(sql_type = Bool)]
-    pub archive: bool,
-
-    #[diesel(sql_type = Timestamp)]
-    pub created_at: NaiveDateTime,
-
-    #[diesel(sql_type = Timestamp)]
-    pub updated_at: NaiveDateTime,
-
-    #[diesel(sql_type = BigInt)]
-    pub upvotes: i64,
-
-    #[diesel(sql_type = BigInt)]
-    pub downvotes: i64,
-}
-
 #[derive(Debug, Deserialize, Serialize)]
 pub struct UpdateSolution {
     pub content: Option<String>,
