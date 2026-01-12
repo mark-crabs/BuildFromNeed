@@ -20,7 +20,7 @@ use utils::dto::Claims;
 #[get("/google/callback")]
 pub async fn google_redirect(
     query: web::Query<AuthRequest>,
-    state: web::Data<AppState>
+    state: web::Data<AppState>,
 ) -> impl Responder {
     let oauth = &state.env.oauth;
     match state.db_pool.get() {
@@ -90,9 +90,7 @@ pub async fn google_redirect(
 }
 
 #[get("/token")]
-pub async fn get_tokens(
-    state: web::Data<AppState>
-) -> impl Responder {
+pub async fn get_tokens(state: web::Data<AppState>) -> impl Responder {
     let oauth = &state.env.oauth;
     let csrf_state = CsrfToken::new_random();
     let (pkce_challenge, pkce_verifier) = PkceCodeChallenge::new_random_sha256();

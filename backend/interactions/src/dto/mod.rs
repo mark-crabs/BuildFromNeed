@@ -1,5 +1,5 @@
-use crate::models::LikeType;
 use diesel::prelude::*;
+use problems::models::LikeType;
 use serde::{Deserialize, Serialize};
 use utils::db::schema::{
     problem_favourite, problem_like, problem_view, solution_favourite, solution_like,
