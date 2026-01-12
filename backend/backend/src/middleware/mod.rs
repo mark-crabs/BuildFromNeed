@@ -1,6 +1,4 @@
-use actix_web::{
-    HttpMessage,
-};
+use actix_web::HttpMessage;
 use std::{
     future::{Ready, ready},
     pin::Pin,

@@ -1,17 +1,12 @@
-use crate::{
-    dto::{AddSolution, SolutionWithOverview, UpdateSolution},
-    models::Solution,
-};
+use crate::dto::{AddSolution, UpdateSolution};
 use actix_web::{HttpResponse, Responder, delete, get, patch, post, web};
 use diesel::sql_query;
 use diesel::sql_types::BigInt;
-use diesel::{
-    ExpressionMethods, RunQueryDsl,
-    query_dsl::methods::{FilterDsl},
-};
+use diesel::{ExpressionMethods, RunQueryDsl, query_dsl::methods::FilterDsl};
+use problems::{dto::SolutionWithOverview, models::Solution};
 use utils::{
     config::AppState,
-    db::schema::{solution},
+    db::schema::solution,
     dto::{Claims, DataResponse, Pagination},
     models::Role,
 };

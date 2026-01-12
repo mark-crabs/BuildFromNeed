@@ -3,7 +3,7 @@ use diesel::ExpressionMethods;
 use diesel::sql_query;
 use diesel::sql_types::BigInt;
 use diesel::{QueryDsl, RunQueryDsl};
-use utils::db::schema::{problem_like};
+use utils::db::schema::problem_like;
 use utils::dto::Claims;
 use utils::models::Role;
 use utils::{
@@ -12,8 +12,9 @@ use utils::{
     dto::{DataResponse, Pagination},
 };
 
+use crate::dto::SolutionWithOverview;
 use crate::dto::{
-    AddProblem, AddProblemView, ProblemWithUserOverview, UpdateProblem,
+    AddProblem, AddProblemView, ProblemAndSolutions, ProblemWithUserOverview, UpdateProblem,
 };
 use crate::models::{Problem, ProblemLike};
 
@@ -72,10 +73,12 @@ pub async fn get_problems(
 // TODO: get some solutions belonging to the problem
 #[get("/{problem_id}")]
 pub async fn get_problem_by_id(
+    web::Query(pagination): web::Query<Pagination>,
     path: web::Path<i64>,
     claims: web::ReqData<Option<Claims>>,
     state: web::Data<AppState>,
 ) -> impl Responder {
+    let pagination = pagination.limit_and_offset();
     let problem_id = path.into_inner();
 
     match state.db_pool.get() {
@@ -115,6 +118,28 @@ pub async fn get_problem_by_id(
         .get_result(&mut connection)
         .unwrap();
 
+            let solutions: Vec<SolutionWithOverview> = sql_query(r#"
+                        SELECT
+                            s.id,
+                            s.problem_id,
+                            s.user_id,
+                            s.content,
+                            s.archive,
+                            s.created_at,
+                            s.updated_at,
+                            (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Up') AS upvotes,
+                            (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Down') AS downvotes
+                        FROM solution s
+                        WHERE s.problem_id = $1
+                        ORDER BY s.created_at DESC
+                        LIMIT $2 OFFSET $3
+                    "#)
+                    .bind::<BigInt, _>(problem_id)
+                    .bind::<BigInt, _>(pagination.limit)
+                    .bind::<BigInt, _>(pagination.offset)
+                    .load(&mut connection)
+                    .unwrap();
+
             // TODO: Place this an async task (populates views)
             if let Some(claims) = claims.into_inner() {
                 let like: Vec<ProblemLike> = problem_like::dsl::problem_like
@@ -134,7 +159,9 @@ pub async fn get_problem_by_id(
                 }
             }
 
-            HttpResponse::Ok().json(problem)
+            HttpResponse::Ok().json(DataResponse::new(ProblemAndSolutions::new(
+                problem, solutions,
+            )))
         }
         Err(_) => HttpResponse::InternalServerError().finish(),
     }
