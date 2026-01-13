@@ -18,8 +18,6 @@ use crate::dto::{
 };
 use crate::models::{Problem, ProblemLike};
 
-// REMEMBER ABOUT PROBLEM LIKE/DIS-LIKES
-
 #[get("")]
 pub async fn get_problems(
     web::Query(pagination): web::Query<Pagination>,
@@ -29,6 +27,12 @@ pub async fn get_problems(
     let pagination = pagination.limit_and_offset();
     match state.db_pool.get() {
         Ok(mut connection) => {
+
+            let is_admin = matches!(
+                claims.into_inner(),
+                Some(claims) if claims.role == Role::Admin
+            );
+
             let problems: Vec<ProblemWithUserOverview> = sql_query(r#"
                     SELECT
                         p.id,
@@ -43,25 +47,38 @@ pub async fn get_problems(
                         p.archive,
                         p.created_at,
                         p.updated_at,
-                
-                        u.email,
-                        u.picture,
-                        u.name,
-                
+
+                        CASE 
+                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            ELSE u.email 
+                        END AS email,
+
+                        CASE 
+                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            ELSE u.picture 
+                        END AS picture,
+
+                        CASE 
+                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            ELSE u.name 
+                        END AS name,
+
                         -- upvotes
-                        (SELECT COUNT(*) FROM problem_like pl WHERE pl.problem_id = p.id AND pl.option = 'Up') AS upvotes,
+                        (SELECT COUNT(*) FROM problem_like pl WHERE pl.problem_id = p.id AND pl.option = 'Up')   AS upvotes,
                         -- downvotes
                         (SELECT COUNT(*) FROM problem_like pl WHERE pl.problem_id = p.id AND pl.option = 'Dowm') AS downvotes,
                         -- solution count
                         (SELECT COUNT(*) FROM solution s WHERE s.problem_id = p.id) AS solution_count
-                
+
                     FROM problem p
                     LEFT JOIN users u ON p.user_id = u.id
+                    WHERE ($3 = true OR p.public = true)
                     ORDER BY p.created_at DESC
                     LIMIT $1 OFFSET $2
                 "#)
                 .bind::<BigInt, _>(pagination.limit)
                 .bind::<BigInt, _>(pagination.offset)
+                .bind::<diesel::sql_types::Bool, _>(is_admin)
                 .load(&mut connection)
                 .unwrap();
             HttpResponse::Ok().json(DataResponse::new(problems))
@@ -70,7 +87,6 @@ pub async fn get_problems(
     }
 }
 
-// TODO: get some solutions belonging to the problem
 #[get("/{problem_id}")]
 pub async fn get_problem_by_id(
     web::Query(pagination): web::Query<Pagination>,
@@ -83,6 +99,7 @@ pub async fn get_problem_by_id(
 
     match state.db_pool.get() {
         Ok(mut connection) => {
+
             let problem: ProblemWithUserOverview = sql_query(r#"
             SELECT
                 p.id,
@@ -142,6 +159,11 @@ pub async fn get_problem_by_id(
 
             // TODO: Place this an async task (populates views)
             if let Some(claims) = claims.into_inner() {
+
+                if problem.public == false && problem.email != claims.email && claims.role != Role::Admin {
+                    return HttpResponse::Forbidden().finish();
+                }
+
                 let like: Vec<ProblemLike> = problem_like::dsl::problem_like
                     .filter(problem_like::problem_id.eq(problem_id))
                     .filter(problem_like::user_id.eq(claims.user_id))
@@ -156,6 +178,10 @@ pub async fn get_problem_by_id(
                         })
                         .execute(&mut connection)
                         .unwrap();
+                }
+            } else {
+                if problem.public == false {
+                    return HttpResponse::Forbidden().finish()
                 }
             }
 
