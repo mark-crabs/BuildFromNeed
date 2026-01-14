@@ -5,10 +5,11 @@ pub mod views;
 
 use self::middleware::AuthorizationBase;
 use self::urls::auth_urls;
-use actix_web::{App, HttpResponse, HttpServer, Responder, get, middleware::Logger, web};
+use actix_web::{App, HttpResponse, HttpServer, Responder, get, http::header, middleware::Logger, web};
 use env_logger::Env;
 use utils::{config::AppState, ssl::ssl_builder_creation};
-
+use actix_cors::Cors;
+ 
 #[get("/")]
 async fn health_check() -> impl Responder {
     // some();
@@ -26,7 +27,13 @@ async fn main() -> std::io::Result<()> {
         .expect("Failed to create ssl builder.");
 
     HttpServer::new(move || {
+        let cors = Cors::default()
+            .allowed_origin("http://localhost:3000")
+            .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
+            .allowed_headers(&[header::AUTHORIZATION, header::ACCEPT, header::CONTENT_TYPE])
+            .max_age(3600);
         App::new()
+            .wrap(cors)
             .wrap(AuthorizationBase)
             .app_data(app_state.clone())
             .service(auth_urls())

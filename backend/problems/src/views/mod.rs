@@ -49,17 +49,17 @@ pub async fn get_problems(
                         p.updated_at,
 
                         CASE 
-                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            WHEN p.anonymous = true AND $3 = false THEN 'Anonymous' 
                             ELSE u.email 
                         END AS email,
 
                         CASE 
-                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            WHEN p.anonymous = true AND $3 = false THEN 'https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
                             ELSE u.picture 
                         END AS picture,
 
                         CASE 
-                            WHEN p.anonymous = true AND $3 = false THEN NULL 
+                            WHEN p.anonymous = true AND $3 = false THEN 'Anonymous' 
                             ELSE u.name 
                         END AS name,
 
@@ -139,14 +139,19 @@ pub async fn get_problem_by_id(
                         SELECT
                             s.id,
                             s.problem_id,
-                            s.user_id,
                             s.content,
                             s.archive,
                             s.created_at,
                             s.updated_at,
+
+                            u.email,
+                            u.name,
+                            u.picture,
+
                             (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Up') AS upvotes,
                             (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Down') AS downvotes
                         FROM solution s
+                        LEFT JOIN users u ON s.user_id = u.id
                         WHERE s.problem_id = $1
                         ORDER BY s.created_at DESC
                         LIMIT $2 OFFSET $3
