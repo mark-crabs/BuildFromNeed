@@ -28,16 +28,21 @@ pub async fn get_all_solutions(
     SELECT
         s.id,
         s.problem_id,
-        s.user_id,
         s.content,
         s.archive,
         s.created_at,
         s.updated_at,
+
+        u.email,
+        u.picture,
+        u.name,
+
         -- upvotes
         (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Up') AS upvotes,
         -- downvotes
         (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Down') AS downvotes
     FROM solution s
+    LEFT JOIN users u ON s.user_id = u.id
     ORDER BY s.created_at DESC
     LIMIT $1 OFFSET $2
 "#)
@@ -50,14 +55,19 @@ pub async fn get_all_solutions(
                             SELECT
                                 s.id,
                                 s.problem_id,
-                                s.user_id,
                                 s.content,
                                 s.archive,
                                 s.created_at,
                                 s.updated_at,
+
+                                u.email,
+                                u.picture,
+                                u.name,
+
                                 (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Up') AS upvotes,
                                 (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Down') AS downvotes
                             FROM solution s
+                            LEFT JOIN users u ON s.user_id = u.id
                             WHERE s.user_id = $1
                             ORDER BY s.created_at DESC
                             LIMIT $2 OFFSET $3
@@ -92,14 +102,19 @@ pub async fn get_solution_by_problem_id(
                     SELECT
                         s.id,
                         s.problem_id,
-                        s.user_id,
                         s.content,
                         s.archive,
                         s.created_at,
                         s.updated_at,
+
+                        u.email,
+                        u.name,
+                        u.picture,
+
                         (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Up') AS upvotes,
                         (SELECT COUNT(*) FROM solution_like sl WHERE sl.solution_id = s.id AND sl.option = 'Down') AS downvotes
                     FROM solution s
+                    LEFT JOIN users u ON s.user_id = u.id 
                     WHERE s.problem_id = $1
                     ORDER BY s.created_at DESC
                     LIMIT $2 OFFSET $3

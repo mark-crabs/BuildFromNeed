@@ -15,9 +15,6 @@ pub struct SolutionWithOverview {
     #[diesel(sql_type = BigInt)]
     pub problem_id: i64,
 
-    #[diesel(sql_type = BigInt)]
-    pub user_id: i64,
-
     #[diesel(sql_type = Text)]
     pub content: String,
 
@@ -35,6 +32,16 @@ pub struct SolutionWithOverview {
 
     #[diesel(sql_type = BigInt)]
     pub downvotes: i64,
+
+    #[diesel(sql_type = Nullable<Text>)]
+    pub email: Option<String>,
+
+    #[diesel(sql_type = Nullable<Text>)]
+    pub picture: Option<String>,
+
+    #[diesel(sql_type = Nullable<Text>)]
+    pub name: Option<String>,
+
 }
 
 #[derive(Deserialize, Insertable, Serialize)]

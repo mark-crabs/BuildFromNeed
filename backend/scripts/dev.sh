@@ -1,2 +1,2 @@
-!#/bin/bash
-watchexec -e rs -r cargo run --bin backend
+#!/bin/bash
+cargo run --bin backend

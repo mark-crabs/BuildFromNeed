@@ -347,12 +347,11 @@ pub fn like_and_unlike_a_problem(
         .unwrap();
 
     if exists.is_empty() {
-        if revoke.revoke.is_none() {
-            diesel::insert_into(problem_like::dsl::problem_like)
-                .values(data)
-                .execute(connection)
-                .unwrap();
-        }
+        diesel::insert_into(problem_like::dsl::problem_like)
+            .values(data)
+            .execute(connection)
+            .unwrap();
+    
     } else {
         let record = exists.first().unwrap();
 
