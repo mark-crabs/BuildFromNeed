@@ -8,6 +8,27 @@ importers:
 
   .:
     dependencies:
+      '@radix-ui/react-avatar':
+        specifier: ^1.1.11
+        version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@radix-ui/react-slot':
+        specifier: ^1.2.4
+        version: 1.2.4(@types/react@19.2.7)(react@19.2.3)
+      '@vercel/analytics':
+        specifier: ^1.6.1
+        version: 1.6.1(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      gamification:
+        specifier: ^0.0.12
+        version: 0.0.12
+      lucide-react:
+        specifier: ^0.562.0
+        version: 0.562.0(react@19.2.3)
       next:
         specifier: 16.1.1
         version: 16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -17,6 +38,12 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      swr:
+        specifier: ^2.3.8
+        version: 2.3.8(react@19.2.3)
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.4.0
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -39,6 +66,9 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.1.18
+      tw-animate-css:
+        specifier: ^1.4.0
+        version: 1.4.0
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -48,6 +78,64 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@angular/animations@6.1.10':
+    resolution: {integrity: sha512-dd/lq7kw3uwfHPICan8psu2nthuUpp7PvMLuNIm0XxObZ4oNs0ls6uxKEDPnEkRKoGdiJpvmsyzZZN9ACMPEAA==}
+    peerDependencies:
+      '@angular/core': 6.1.10
+
+  '@angular/common@6.1.10':
+    resolution: {integrity: sha512-73xxTSYJNKfiJ7C1Ajg+sz5l8y+blb/vNgHYg7O3yem5zLBnfPpidJ1UGg4W4d2Y+jwUVJbZKh8SKJarqAJVUQ==}
+    peerDependencies:
+      '@angular/core': 6.1.10
+      rxjs: ^6.0.0
+
+  '@angular/compiler@6.1.10':
+    resolution: {integrity: sha512-FPIb2j3zfoBwb6vo/u0gQeu70h8InGlSisBr3xMACs/35/pwB6kbQR+JQiUr0D7k6QApg7AuMkvq8aFNelg0aw==}
+
+  '@angular/core@6.1.10':
+    resolution: {integrity: sha512-61l3rIQTVdT45eOf6/fBJIeVmV10mcrxqS4N/1OWkuDT29YSJTZSxGcv8QjAyyutuhcqWWpO6gVRkN07rWmkPg==}
+    peerDependencies:
+      rxjs: ^6.0.0
+      zone.js: ~0.8.26
+
+  '@angular/forms@6.1.10':
+    resolution: {integrity: sha512-zAPx2kMV1/FbP5DrY472Sd/ze1m+GS6T5ullZCtP392r62p2RkwzDCXieR51YiRJjZj3M6c3AcRND7PWBdXT7A==}
+    peerDependencies:
+      '@angular/common': 6.1.10
+      '@angular/core': 6.1.10
+      '@angular/platform-browser': 6.1.10
+      rxjs: ^6.0.0
+
+  '@angular/http@6.1.10':
+    resolution: {integrity: sha512-LDsSqyexh8fj23y+G2oSGLWSZVhbxBBo2ehYHnRgH/jlp0pmZVLRaGgUMNSCVtZc1rxLzpEjZjtw+P+qlutAtw==}
+    deprecated: Package no longer supported. Use @angular/common instead, see https://angular.io/guide/deprecations#angularhttp
+    peerDependencies:
+      '@angular/core': 6.1.10
+      '@angular/platform-browser': 6.1.10
+      rxjs: ^6.0.0
+
+  '@angular/platform-browser-dynamic@6.1.10':
+    resolution: {integrity: sha512-DmBSUyFPoyKqkmBXyJ2CrP1oXDioeoBlPA8lmWUDUv2yBuoHIzIkdY/OkTZbdyu/QYa1hK2Jl9OlfoeoenKddg==}
+    peerDependencies:
+      '@angular/common': 6.1.10
+      '@angular/compiler': 6.1.10
+      '@angular/core': 6.1.10
+      '@angular/platform-browser': 6.1.10
+
+  '@angular/platform-browser@6.1.10':
+    resolution: {integrity: sha512-CB7pqMwtgb7KjdHDAJlsXcs0rrU+2xQVaoOaqEfJtUrKhtGMLaZh8Qoic5l92SoGattkOw7SYarAOsWlAsVfvw==}
+    peerDependencies:
+      '@angular/common': 6.1.10
+      '@angular/core': 6.1.10
+
+  '@angular/router@6.1.10':
+    resolution: {integrity: sha512-tekI3dkdvd65oMoxjjgRA+16uDgPUBWHhYxids6pgO8vobZNtCo8VaVlcDyLUhdmtS5kONELx0iL5E2M0Y2Bag==}
+    peerDependencies:
+      '@angular/common': 6.1.10
+      '@angular/core': 6.1.10
+      '@angular/platform-browser': 6.1.10
+      rxjs: ^6.0.0
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -405,6 +493,86 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@radix-ui/react-avatar@1.1.11':
+    resolution: {integrity: sha512-0Qk603AHGV28BOBO34p7IgD5m+V5Sg/YovfayABkoDDBM5d3NCx0Mp4gGrjzLGes1jV5eNOE1r3itqOR33VC6Q==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-compose-refs@1.1.2':
+    resolution: {integrity: sha512-z4eqJvfiNnFMHIIvXP3CY57y2WJs5g2v3X0zm9mEJkrkNv4rDxu+sg9Jh8EkXyeqBkB7SOcboo9dMVqhyrACIg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-context@1.1.3':
+    resolution: {integrity: sha512-ieIFACdMpYfMEjF0rEf5KLvfVyIkOz6PDGyNnP+u+4xQ6jny3VCgA4OgXOwNx2aUkxn8zx9fiVcM8CfFYv9Lxw==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-primitive@2.1.4':
+    resolution: {integrity: sha512-9hQc4+GNVtJAIEPEqlYqW5RiYdrr8ea5XQ0ZOnD6fgru+83kqT15mq2OCcbe8KnjRZl5vF3ks69AKz3kh1jrhg==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-slot@1.2.4':
+    resolution: {integrity: sha512-Jl+bCv8HxKnlTLVrcDE8zTMJ09R9/ukw4qBs/oZClOfoQk/cOTbDn+NceXfV7j09YPVQUryJPHurafcSg6EVKA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-use-callback-ref@1.1.1':
+    resolution: {integrity: sha512-FkBMwD+qbGQeMu1cOHnuGB6x4yzPjho8ap5WtbEJ26umhgqVXbhekKUQO+hZEL1vU92a3wHwdp0HAcqAUF5iDg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-use-is-hydrated@0.1.0':
+    resolution: {integrity: sha512-U+UORVEq+cTnRIaostJv9AGdV3G6Y+zbVd+12e18jQ5A3c0xL03IhnHuiU4UV69wolOQp5GfR58NW/EgdQhwOA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-use-layout-effect@1.1.1':
+    resolution: {integrity: sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
@@ -676,6 +844,32 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@vercel/analytics@1.6.1':
+    resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -796,8 +990,15 @@ packages:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
 
+  class-variance-authority@0.7.1:
+    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
+
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -811,6 +1012,10 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  core-js@2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -861,6 +1066,10 @@ packages:
   define-properties@1.2.1:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
+
+  dequal@2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
 
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
@@ -1097,6 +1306,9 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  gamification@0.0.12:
+    resolution: {integrity: sha512-c9NsR6gru0in4292+YkRJYp0Ik6bIPOY2QW/Q3kbJZVatE4ILS4M3tpZuO5TGh0xq8hcfxF23KdnsyHzHnDAgw==}
 
   generator-function@2.0.1:
     resolution: {integrity: sha512-SFdFmIJi+ybC0vjlHN0ZGVGHc3lgE0DxPAT0djjVg+kjOnSqclqmj0KQ7ykTOLP6YxoqOvuAODGdcHJn+43q3g==}
@@ -1450,6 +1662,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-react@0.562.0:
+    resolution: {integrity: sha512-82hOAu7y0dbVuFfmO4bYF1XEwYk/mEbM5E+b1jgci/udUBEE/R7LF5Ip0CCEmXe8AybRM8L+04eP+LGZeDvkiw==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -1658,6 +1875,10 @@ packages:
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
+  rxjs@6.2.2:
+    resolution: {integrity: sha512-0MI8+mkKAXZUF9vMrEoPnaoHkfzBPP4IGwUYRJhIRJF6/w3uByO1e91bEHn8zd43RdkTMKiooYKmwz7RH6zfOQ==}
+    engines: {npm: '>=2.0.0'}
+
   safe-array-concat@1.1.3:
     resolution: {integrity: sha512-AURm5f0jYEOydBj7VQlVvDrjeFgthDdEF5H1dP+6mNpoXOMo1quQqJ4wvJDyRZ9+pO3kGWoOdmV08cSv2aJV6Q==}
     engines: {node: '>=0.4'}
@@ -1785,6 +2006,14 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  swr@2.3.8:
+    resolution: {integrity: sha512-gaCPRVoMq8WGDcWj9p4YWzCMPHzE0WNl6W8ADIx9c3JBEIdMkJGMzW+uzXvxHMltwcYACr9jP+32H8/hgwMR7w==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  tailwind-merge@3.4.0:
+    resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
+
   tailwindcss@4.1.18:
     resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
 
@@ -1809,8 +2038,14 @@ packages:
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
+  tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
+  tw-animate-css@1.4.0:
+    resolution: {integrity: sha512-7bziOlRqH0hJx80h/3mbicLW7o8qLsH5+RaLR2t+OHM3D0JlWGODQKQ4cxbK7WlvmUxpcj6Kgu6EKqjrGFe3QQ==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -1863,6 +2098,11 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  use-sync-external-store@1.6.0:
+    resolution: {integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
     engines: {node: '>= 0.4'}
@@ -1904,9 +2144,70 @@ packages:
   zod@4.3.4:
     resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
 
+  zone.js@0.8.29:
+    resolution: {integrity: sha512-mla2acNCMkWXBD+c+yeUrBUrzOxYMNFdQ6FGfigGGtEVBPJx07BQeJekjt9DmH1FtZek4E9rE1eRR9qQpxACOQ==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@angular/animations@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))':
+    dependencies:
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      tslib: 1.14.1
+
+  '@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)':
+    dependencies:
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      rxjs: 6.2.2
+      tslib: 1.14.1
+
+  '@angular/compiler@6.1.10':
+    dependencies:
+      tslib: 1.14.1
+
+  '@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)':
+    dependencies:
+      rxjs: 6.2.2
+      tslib: 1.14.1
+      zone.js: 0.8.29
+
+  '@angular/forms@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)':
+    dependencies:
+      '@angular/common': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      '@angular/platform-browser': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      rxjs: 6.2.2
+      tslib: 1.14.1
+
+  '@angular/http@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)':
+    dependencies:
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      '@angular/platform-browser': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      rxjs: 6.2.2
+      tslib: 1.14.1
+
+  '@angular/platform-browser-dynamic@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/compiler@6.1.10)(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))':
+    dependencies:
+      '@angular/common': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)
+      '@angular/compiler': 6.1.10
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      '@angular/platform-browser': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      tslib: 1.14.1
+
+  '@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))':
+    dependencies:
+      '@angular/common': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      tslib: 1.14.1
+
+  '@angular/router@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)':
+    dependencies:
+      '@angular/common': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      '@angular/platform-browser': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      rxjs: 6.2.2
+      tslib: 1.14.1
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -2248,6 +2549,66 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@radix-ui/react-avatar@1.1.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@radix-ui/react-context': 1.1.3(@types/react@19.2.7)(react@19.2.3)
+      '@radix-ui/react-primitive': 2.1.4(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@radix-ui/react-use-callback-ref': 1.1.1(@types/react@19.2.7)(react@19.2.3)
+      '@radix-ui/react-use-is-hydrated': 0.1.0(@types/react@19.2.7)(react@19.2.3)
+      '@radix-ui/react-use-layout-effect': 1.1.1(@types/react@19.2.7)(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+    optionalDependencies:
+      '@types/react': 19.2.7
+      '@types/react-dom': 19.2.3(@types/react@19.2.7)
+
+  '@radix-ui/react-compose-refs@1.1.2(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  '@radix-ui/react-context@1.1.3(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  '@radix-ui/react-primitive@2.1.4(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@radix-ui/react-slot': 1.2.4(@types/react@19.2.7)(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+    optionalDependencies:
+      '@types/react': 19.2.7
+      '@types/react-dom': 19.2.3(@types/react@19.2.7)
+
+  '@radix-ui/react-slot@1.2.4(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.7)(react@19.2.3)
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  '@radix-ui/react-use-callback-ref@1.1.1(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  '@radix-ui/react-use-is-hydrated@0.1.0(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+      use-sync-external-store: 1.6.0(react@19.2.3)
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  '@radix-ui/react-use-layout-effect@1.1.1(@types/react@19.2.7)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.7
+
   '@rtsao/scc@1.1.0': {}
 
   '@swc/helpers@0.5.15':
@@ -2496,6 +2857,11 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+  '@vercel/analytics@1.6.1(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+    optionalDependencies:
+      next: 16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react: 19.2.3
+
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
       acorn: 8.15.0
@@ -2647,7 +3013,13 @@ snapshots:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
+  class-variance-authority@0.7.1:
+    dependencies:
+      clsx: 2.1.1
+
   client-only@0.0.1: {}
+
+  clsx@2.1.1: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -2658,6 +3030,8 @@ snapshots:
   concat-map@0.0.1: {}
 
   convert-source-map@2.0.0: {}
+
+  core-js@2.6.12: {}
 
   cross-spawn@7.0.6:
     dependencies:
@@ -2708,6 +3082,8 @@ snapshots:
       define-data-property: 1.1.4
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
+
+  dequal@2.0.3: {}
 
   detect-libc@2.1.2: {}
 
@@ -3097,6 +3473,21 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
+  gamification@0.0.12:
+    dependencies:
+      '@angular/animations': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      '@angular/common': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2)
+      '@angular/compiler': 6.1.10
+      '@angular/core': 6.1.10(rxjs@6.2.2)(zone.js@0.8.29)
+      '@angular/forms': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)
+      '@angular/http': 6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)
+      '@angular/platform-browser': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))
+      '@angular/platform-browser-dynamic': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/compiler@6.1.10)(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))
+      '@angular/router': 6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(@angular/platform-browser@6.1.10(@angular/common@6.1.10(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29))(rxjs@6.2.2))(@angular/core@6.1.10(rxjs@6.2.2)(zone.js@0.8.29)))(rxjs@6.2.2)
+      core-js: 2.6.12
+      rxjs: 6.2.2
+      zone.js: 0.8.29
+
   generator-function@2.0.1: {}
 
   gensync@1.0.0-beta.2: {}
@@ -3427,6 +3818,10 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-react@0.562.0(react@19.2.3):
+    dependencies:
+      react: 19.2.3
+
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -3642,6 +4037,10 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
+  rxjs@6.2.2:
+    dependencies:
+      tslib: 1.14.1
+
   safe-array-concat@1.1.3:
     dependencies:
       call-bind: 1.0.8
@@ -3831,6 +4230,14 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  swr@2.3.8(react@19.2.3):
+    dependencies:
+      dequal: 2.0.3
+      react: 19.2.3
+      use-sync-external-store: 1.6.0(react@19.2.3)
+
+  tailwind-merge@3.4.0: {}
+
   tailwindcss@4.1.18: {}
 
   tapable@2.3.0: {}
@@ -3855,7 +4262,11 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
+  tslib@1.14.1: {}
+
   tslib@2.8.1: {}
+
+  tw-animate-css@1.4.0: {}
 
   type-check@0.4.0:
     dependencies:
@@ -3950,6 +4361,10 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  use-sync-external-store@1.6.0(react@19.2.3):
+    dependencies:
+      react: 19.2.3
+
   which-boxed-primitive@1.1.1:
     dependencies:
       is-bigint: 1.1.0
@@ -4006,3 +4421,5 @@ snapshots:
       zod: 4.3.4
 
   zod@4.3.4: {}
+
+  zone.js@0.8.29: {}
