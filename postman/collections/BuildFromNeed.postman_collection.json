@@ -1,0 +1,800 @@
+{
+  "info": {
+    "_postman_id": "6b168016-0ae2-4f55-9445-472b6dbdb7b5",
+    "name": "BuildFromNeed",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "Get users",
+          "id": "bdb39013-0d97-4cd0-a481-623def4caa39",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/users",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add User",
+          "id": "dd3b86fc-2a10-41c5-b929-6a31c5e2d60b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Juanita\",\n    \"give_name\": \"Mumbi\",\n    \"email\": \"mumbijuanita@gmail.com\",\n    \"email_verified\": false,\n    \"role\": \"Admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user by id",
+          "id": "77a51158-3ce1-42ef-a5df-f38ad507bb90",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/users/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user",
+          "id": "87611962-f025-47f6-9091-6ad4192b3d36",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/users/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user",
+          "id": "5dd758c7-2947-4018-b863-464ffe07626a",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"hibijabjab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/users/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7447c27c-8828-4e95-aee2-20384e9fd9b3"
+    },
+    {
+      "name": "authenticaiton",
+      "item": [
+        {
+          "name": "get token (open in browser)",
+          "id": "b1500cb1-5ec6-4a00-a9ca-257ade5e84f5",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/auth/token",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "d9e5db1f-68f1-4c64-80ec-14b4c0cddd4e"
+    },
+    {
+      "name": "problems",
+      "item": [
+        {
+          "name": "Get problems",
+          "id": "75cf0c21-60ec-47af-ba71-460fc97ef444",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW9sVXNEWEo2VDVXTExXYVpLR043SUR0WEwtWFR5NzBBRkZRcWxtQVJJMzZsakRfV1I9czk2LWMiLCJpc3MiOiI0ODIzMzkzMjcyMTAtM2dmaWYzMTAxdmI0OTRwaG1kcDVlMXZuaWszOHE0Mm4uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJpYXQiOjE3NjgxNzgyMTcsImV4cCI6MTc2ODI2NDYxNywidXNlcl9pZCI6MX0.KzVH7Pm-rvYnt3hbg6Z2rXg9oYDxl8Wh5UPYC9XYiTk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/problems",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "problems"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get problem by id",
+          "id": "bb59bb7a-3431-49b1-aec9-c2d41c01b2fd",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/problems/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "problems",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add a problem",
+          "id": "1ddd7e15-07af-49f5-a100-7d0f3dd43c9d",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": 1,\n    \"public\": false,\n    \"category\": \"Medical\",\n    \"sub_category\": \"animal\",\n    \"title\": \"some\",\n    \"description\": \"something\",\n    \"anonymous\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/problems",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "problems"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a problem",
+          "id": "0487ef8c-93d8-43fb-88b8-001cfd877030",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": 1,\n    \"public\": false,\n    \"category\": \"Medical\",\n    \"sub_category\": \"animal\",\n    \"title\": \"some\",\n    \"description\": \"something\",\n    \"anonymous\": true\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/problems/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "problems",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update a problem",
+          "id": "f475067e-7106-447d-9d7d-f40c75c52210",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"anonymous\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/problems/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "problems",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "52c98c24-21d1-4633-8222-503912d8c8d8"
+    },
+    {
+      "name": "solutions",
+      "item": [
+        {
+          "name": "get all solutions",
+          "id": "a2f02a19-7fd1-4017-a7bf-27516f447c47",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/solutions",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "solutions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add a solution",
+          "id": "79eafaa9-e80f-4f11-8f42-da377c5a11d9",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"content\": \"good stuff\",\n    \"user_id\": 1,\n    \"problem_id\":3,\n    \"solution_type\": \"Comment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/solutions",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "solutions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a solution",
+          "id": "f79782c1-8cef-414e-a7fa-bc3426815b28",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"solution_type\": \"Solution\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/solutions/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "solutions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete a solution",
+          "id": "4fd5ab68-1e9c-4549-b19f-53a77200dedc",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"solution_type\": \"Solution\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/solutions/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "solutions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "problem solutions",
+          "id": "3696f8d0-3277-4343-b871-01259bb60127",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"content\": \"good stuff\",\n    \"user_id\": 1,\n    \"problem_id\":3,\n    \"solution_type\": \"Comment\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/solutions/p/3",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "solutions",
+                "p",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e9b80e9c-a7ff-4b12-a122-11cebe47b7d8"
+    },
+    {
+      "name": "interactions",
+      "item": [
+        {
+          "name": "get problem likes",
+          "id": "b4391de8-89b5-4c43-83b7-a6f41403acb0",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/problem-likes",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "problem-likes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get solution likes",
+          "id": "8ed28acf-93a5-4952-b148-7b297f1ea922",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/solution-likes",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "solution-likes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get solution favourites",
+          "id": "8236d2bf-9091-4bdd-9af6-d81898fffe7a",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/solution-favourites",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "solution-favourites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get problem favourites",
+          "id": "51e6b12f-fb89-44d3-8c03-67dc6db89f0d",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/problem-favourites",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "problem-favourites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get problem favourite by problem id",
+          "id": "fd92fc99-9f25-4992-ba43-7213ac7b5d57",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/problem-favourites/3",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "problem-favourites",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get solution favourite by solution id",
+          "id": "e7f50a3f-c159-4887-9a02-1b8e783972a1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/interactions/solution-favourites/1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "solution-favourites",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "like a problem",
+          "id": "ede6d65f-3fd6-46e5-abef-9999a9dfea74",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"problem_id\": 3,\n    \"user_id\": 1,\n    \"option\": \"Up\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/interactions/problem-like?revoke=false",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "problem-like"
+              ],
+              "query": [
+                {
+                  "key": "revoke",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "like a solution",
+          "id": "b20f3b14-d0f3-45b3-9051-4a856d114dba",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"solution_id\": 1,\n    \"user_id\": 1,\n    \"option\": \"Down\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/interactions/solution-like?revoke=false",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "solution-like"
+              ],
+              "query": [
+                {
+                  "key": "revoke",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fav/unfav a problem",
+          "id": "71806a0c-90ce-49ff-a1e3-343e0d2448ef",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": 1,\n    \"problem_id\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/interactions/problem-favourite",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "problem-favourite"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fav/unfav a solution",
+          "id": "58c70d9f-1904-4f2b-9027-ae1894684f30",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRXVnZW5lIE1hcmsiLCJlbWFpbCI6ImV1Z2VuZW1hcmtrZUBnbWFpbC5jb20iLCJyb2xlIjoiQ2FzdWFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lvbFVzRFhKNlQ1V0xMV2FaS0dON0lEdFhMLVhUeTcwQUZGUXFsbUFSSTM2bGpEX1dSPXM5Ni1jIiwiaXNzIjoiNDgyMzM5MzI3MjEwLTNnZmlmMzEwMXZiNDk0cGhtZHA1ZTF2bmlrMzhxNDJuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNzY4MTU0NDcwLCJleHAiOjE3NjgyNDA4NzB9.AOmkp2LGgROw2rFtFW6ytynipl2aWVGgiEWip8vkXdg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": 1,\n    \"solution_id\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{domain}}/interactions/solution-favourite",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "interactions",
+                "solution-favourite"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "fda6474e-c2a1-44df-9ff3-8765c929f9a0"
+    }
+  ]
+}
